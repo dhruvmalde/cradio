@@ -46,21 +46,21 @@
             combo_copyw {
                     timeout-ms = <50>;
                     key-positions = <21 22>;
-                    bindings = <&kp LALT(C)>;
+                    bindings = <&kp LCTRL(C)>;
                     layers = <1>;
             };
            
             combo_pastew {
                     timeout-ms = <50>;
                     key-positions = <22 23>;
-                    bindings = <&kp LALT(V)>;
+                    bindings = <&kp LCTRL(V)>;
                     layers = <1>;
             };
            
             combo_undow {
                     timeout-ms = <50>;
                     key-positions = <20 24>;
-                    bindings = <&kp LALT(Z)>;
+                    bindings = <&kp LCTRL(Z)>;
                     layers = <1>;
             };
     
