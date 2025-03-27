@@ -55,6 +55,7 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
             keep-mods = <(MOD_RSFT)>;
         };
+
         os_aware_mods: os_aware_mods {
             compatible = "zmk,behavior-host-os-hold-tap";
             #binding-cells = <2>;
@@ -64,12 +65,14 @@
         };
 
         ht: hold_tap {
+            label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
             flavor = "tap-preferred";
-            bindings = <&mo>, <&kp>;
+            tapping-term-ms = <220>;
+            quick-tap-ms = <150>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
         };
     };
 
