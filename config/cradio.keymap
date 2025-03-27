@@ -69,7 +69,6 @@
                     timeout-ms = <50>;
                     key-positions = <8 9>;
                     bindings = &bspc_del;
-                    layers = <0 1 3>;
             };
     
     };
