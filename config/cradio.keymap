@@ -35,6 +35,14 @@
 
 / {
     behaviors {
+         bspc_del: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSPACE>, <&kp DELETE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
+        
         ht: hold_tap {
             label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
@@ -57,47 +65,46 @@
     
     
             combo_copyw {
-                    timeout-ms = <50>;
-                    key-positions = <21 22>;
-                    bindings = <&kp LALT(C)>;
-                    layers = <1>;
+                timeout-ms = <50>;
+                key-positions = <21 22>;
+                bindings = <&sk LCTRL &kp C &kp LCTRL>;  // Explicitly sends CTRL+C
+                layers = <1>;
             };
-           
+            
             combo_pastew {
-                    timeout-ms = <50>;
-                    key-positions = <22 23>;
-                    bindings = <&kp LALT(V)>;
-                    layers = <1>;
+                timeout-ms = <50>;
+                key-positions = <22 23>;
+                bindings = <&sk LCTRL &kp V &kp LCTRL>;  // Explicitly sends CTRL+V
+                layers = <1>;
             };
-           
+            
             combo_undow {
-                    timeout-ms = <50>;
-                    key-positions = <20 24>;
-                    bindings = <&kp LALT(Z)>;
-                    layers = <1>;
+                timeout-ms = <50>;
+                key-positions = <20 24>;
+                bindings = <&sk LCTRL &kp Z &kp LCTRL>;  // Explicitly sends CTRL+Z
+                layers = <1>;
             };
     
             combo_copym {
-                    timeout-ms = <50>;
-                    key-positions = <21 22>;
-                    bindings = <&kp LGUI(C)>;
-                    layers = <0>;
+                timeout-ms = <50>;
+                key-positions = <21 22>;
+                bindings = <&sk LGUI &kp C &kp LGUI>;  // LGUI = Command (⌘) on Mac
+                layers = <1>;
             };
-    
+            
             combo_pastem {
-                    timeout-ms = <50>;
-                    key-positions = <22 23>;
-                    bindings = <&kp LGUI(V)>;
-                    layers = <0>;
+                timeout-ms = <50>;
+                key-positions = <22 23>;
+                bindings = <&sk LGUI &kp V &kp LGUI>;  // LGUI = Command (⌘) on Mac
+                layers = <1>;
             };
-    
+            
             combo_undom {
-                    timeout-ms = <50>;
-                    key-positions = <20 24>;
-                    bindings = <&kp LGUI (Z)>;
-                    layers = <0>;
+                timeout-ms = <50>;
+                key-positions = <20 24>;
+                bindings = <&sk LGUI &kp Z &kp LGUI>;  // LGUI = Command (⌘) on Mac
+                layers = <1>;
             };
-    
             combo_backspace {
                     timeout-ms = <50>;
                     key-positions = <8 9>;
@@ -124,19 +131,19 @@
         compatible = "zmk,keymap";
         default_layer {
             bindings = <
-            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
-            HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,     K,         L,        SQT)
-            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 3 BSPC
+            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
+            HRML(A,        S,         D,         F)      &kp G          &kp H      HRMR(J,     K,         L,        SQT)
+            &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
+                                             &lt 2 ENTER &kp TAB        &bspc_del  &lt 3 SPACE 
             >;
         };
 
         win_layer {
             bindings = <
-            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
-            WHRML(A,   S,         D,         F)         &kp G          &kp H     WHRMR(J,    K,         L,         SQT)
-            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 3 BSPC
+            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
+            WHRML(A,   S,         D,         F)          &kp G          &kp H      WHRMR(J,    K,         L,         SQT)
+            &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
+                                             &lt 2 ENTER &kp TAB        &bspc_del  &lt 3 SPACE 
             >;
         };
 
@@ -144,26 +151,27 @@
         
          left_layer {
             bindings = <
-            &kp INS     &kp N1     &kp N2     &kp N3     &none          &msc SCRL_UP     &msc SCRL_LEFT   &kp UP          &msc SCRL_RIGHT &none  
-            &kp DEL     &kp N4     &kp N5     &kp N6     &kp N0         &msc SCRL_DOWN   &kp LEFT         &kp DOWN        &kp RIGHT       &mkp RCLK
+            &kp INS     &kp N1     &kp N2     &kp N3     &none          &mkp MCLK        &msc SCRL_LEFT   &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  
+            &kp DEL     &kp N4     &kp N5     &kp N6     &kp N0         &mkp RCLK        &kp LEFT         &kp DOWN        &kp UP          &kp RIGHT       
             &caps_word  &kp N7     &kp N8     &kp N9     &none          &mkp LCLK        &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  
                                               &trans     &trans         &trans           &trans
             >;
-        };
+        }; 
+        
 
         right_layer {
             bindings = <
-            &trans     &kp LBKT   &kp LBRC   &kp RBRC   &trans         &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
-            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp GRAVE
-            &trans     &trans     &trans     &kp COLON  &kp SEMI       &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
-                                             &trans     &trans         &trans     &trans
+            &trans     &kp LBKT   &kp LBRC   &kp RBRC   &trans          &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
+            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT       &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp GRAVE
+            &trans     &trans     &trans     &kp COLON  &kp SEMI        &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
+                                             &trans     &trans          &trans     &trans
             >;
         };
 
         tri_layer {
             bindings = <
-            &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG &tog WIN  &kp C_MUTE    &kp C_NEXT
-            &kp F5     &kp F6     &kp F7     &kp F8     &bt BT_SEL 1     &bt BT_SEL 3  &kp C_BRI_UP  &trans   &kp C_VOL_UP  &kp C_PP
+            &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG &tog WIN  &kp C_MUTE    &kp C_PP
+            &kp F5     &kp F6     &kp F7     &kp F8     &bt BT_SEL 1     &bt BT_SEL 3  &kp C_BRI_UP  &trans   &kp C_VOL_UP  &kp C_NEXT
             &kp F9     &kp F10    &kp F11    &kp F12    &bt BT_CLR       &bt BT_SEL 4  &kp C_BRI_DEC  &trans  &kp C_VOL_DN  &kp C_PREV
                                              &trans     &trans           &trans        &trans
             >;
