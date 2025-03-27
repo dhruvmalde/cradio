@@ -68,7 +68,7 @@
             combo_backdel {
                     timeout-ms = <50>;
                     key-positions = <8 9>;
-                    bindings = bspc_del;
+                    bindings = <&bspc_del>;
             };
     
     };
