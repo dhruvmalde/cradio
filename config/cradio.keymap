@@ -6,30 +6,32 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/host_os.h>
 
 // 1. Add OS toggle at the top
 #define OS_WIN 0  // Windows mode
 #define OS_MAC 1  // Mac mode
 #define OS_MODE OS_WIN  // Default to Windows (change this or make it dynamic)
 
-// 2. OS-aware homerow macros
 #define HRML(k1,k2,k3,k4) \
-    COND(OS_MODE == OS_WIN, \
-        &ht LSHFT k1 &ht LCTRL k2 &ht LGUI k3 &ht LALT k4, \  // Win order
-        &ht LSHFT k1 &ht LALT k2 &ht LCTRL k3 &ht LGUI k4     // Mac order
-    )
+    &os_aware_mods \
+        HOST_OS_ARG( \
+            /* Windows/Linux */ &ht LSHFT k1 &ht LCTRL k2 &ht LGUI k3 &ht LALT k4, \
+            /* Mac */          &ht LSHFT k1 &ht LALT k2 &ht LCTRL k3 &ht LGUI k4  \
+        )
 
 #define HRMR(k1,k2,k3,k4) \
-    COND(OS_MODE == OS_WIN, \
-        &ht RALT k1 &ht RGUI k2 &ht RCTRL k3 &ht RSHFT k4, \  // Win order
-        &ht RGUI k1 &ht RCTRL k2 &ht RALT k3 &ht RSHFT k4      // Mac order
-    )
+    &os_aware_mods \
+        HOST_OS_ARG( \
+            /* Windows/Linux */ &ht RALT k1 &ht RGUI k2 &ht RCTRL k3 &ht RSHFT k4, \
+            /* Mac */          &ht RGUI k1 &ht RCTRL k2 &ht RALT k3 &ht RSHFT k4  \
+        )
 
 // Home row mods macro
-#define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
-#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
-#define WHRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LCTRL k2  &ht LGUI k3  &ht LALT k4
-#define WHRMR(k1,k2,k3,k4) &ht RALT k1  &ht RGUI k2  &ht RCTRL k3  &ht RSHFT k4
+//#define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
+//#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
+//#define WHRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LCTRL k2  &ht LGUI k3  &ht LALT k4
+//#define WHRMR(k1,k2,k3,k4) &ht RALT k1  &ht RGUI k2  &ht RCTRL k3  &ht RSHFT k4
 
 #define ALPHABETS 0
 #define RIG 2
@@ -61,8 +63,14 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
             keep-mods = <(MOD_RSFT)>;
         };
-        
-        ht: hold_tap {
+        os_aware_mods: os_aware_mods {
+            compatible = "zmk,behavior-host-os-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+            ht: hold_tap {
             label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -100,7 +108,7 @@
 
     keymap {
         compatible = "zmk,keymap";
-        aplhabet_layer {
+        alpha_layer {
             bindings = <
            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
            HRML(A,        S,         D,         F)      &kp G          &kp H      HRMR(J,     K,         L,        SQT)
@@ -131,7 +139,7 @@
 
         tri_layer {
             bindings = <
-            &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG   &TOG_OS   &kp C_MUTE    &kp C_PP
+            &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG   &none   &kp C_MUTE    &kp C_PP
             &kp F5     &kp F6     &kp F7     &kp F8     &bt BT_SEL 1     &bt BT_SEL 3  &kp C_BRI_UP   &trans   &kp C_VOL_UP  &kp C_NEXT
             &kp F9     &kp F10    &kp F11    &kp F12    &bt BT_CLR       &bt BT_SEL 4  &kp C_BRI_DEC  &trans   &kp C_VOL_DN  &kp C_PREV
                                              &trans     &trans           &trans        &trans
