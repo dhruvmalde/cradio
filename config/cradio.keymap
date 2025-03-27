@@ -20,32 +20,19 @@
 #define TRI 4
 
 
-// Set max speed (add this at the top of your keymap)
-#define U_MOUSE_MOVE_MAX 2000  // Higher = faster
-
-// Redefine directions
-#undef MOVE_UP
-#undef MOVE_DOWN
-#undef MOVE_LEFT
-#undef MOVE_RIGHT
-#define MOVE_UP    MOVE_VERT(-U_MOUSE_MOVE_MAX)
-#define MOVE_DOWN  MOVE_VERT(U_MOUSE_MOVE_MAX)
-#define MOVE_LEFT  MOVE_HOR(-U_MOUSE_MOVE_MAX)
-#define MOVE_RIGHT MOVE_HOR(U_MOUSE_MOVE_MAX)
-
 // Configure mmv behavior
 &mmv {
     x-input-code = <INPUT_REL_X>;
     y-input-code = <INPUT_REL_Y>;
-    time-to-max-speed-ms = <300>;
+    time-to-max-speed-ms = <200>;
     acceleration-exponent = <2>;
 };
 
 &msc {
     x-input-code = <INPUT_REL_HWHEEL>;
     y-input-code = <INPUT_REL_WHEEL>;
-    time-to-max-speed-ms = <300>;
-    acceleration-exponent = <0>;
+    time-to-max-speed-ms = <200>;
+    acceleration-exponent = <2>;
 };
 
 /{
