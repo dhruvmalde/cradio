@@ -39,3 +39,4 @@ Combo implementation: Copy, Paste, Undo, Delete, Escape & Enter
 
 Keyboard Layout file  - ZMK Ferris Sweep
 
+![my_keymap](https://github.com/user-attachments/assets/9761312d-bfe3-4ead-8508-6a9d8f5539b4)
