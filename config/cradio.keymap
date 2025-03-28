@@ -88,7 +88,7 @@
            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
            HRML(A,        S,         D,         F)      &kp G          &kp H      HRMR(J,     K,         L,        SQT)
            &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 bspc_del 
+                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 &bspc_del 
            >;
        };
        win_layer {
@@ -96,7 +96,7 @@
            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
            WHRML(A,   S,         D,         F)          &kp G          &kp H      WHRMR(J,    K,         L,         SQT)
            &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 bspc_del
+                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 &bspc_del
            >;
        };
 
