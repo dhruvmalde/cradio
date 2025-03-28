@@ -14,10 +14,10 @@
 #define WHRMR(k1,k2,k3,k4) &ht RALT k1  &ht RGUI k2  &ht RCTRL k3  &ht RSHFT k4
 
 #define MAC 0
-#define WIN 1
-#define RIG 2
-#define LEF 3
-#define TRI 4
+#define WINDOWS 1
+#define RIGHT 2
+#define LEFT 3
+#define FUNCTION 4
 
 
 // Configure mmv behavior
@@ -75,20 +75,20 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-       tri_layer {
-            if-layers = <RIG LEF>;
-            then-layer = <TRI>;
+       function_layer {
+            if-layers = <RIGHT LEFT>;
+            then-layer = <FUNCTION>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
-        default_layer {
+        mac_layer {
             bindings = <
            &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
            HRML(A,        S,         D,         F)      &kp G          &kp H      HRMR(J,     K,         L,        SQT)
-            &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 BSPC 
+           &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
+                                            &lt 2 TAB &kp ENTER        &kp SPACE  &lt 3 bspc_del 
            >;
        };
        win_layer {
@@ -120,7 +120,7 @@
             >;
         };
 
-        tri_layer {
+        function_layer {
             bindings = <
             &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG &tog WIN  &kp C_MUTE    &kp C_PP
             &kp F5     &kp F6     &kp F7     &kp F8     &bt BT_SEL 1     &bt BT_SEL 3  &kp C_BRI_UP  &trans   &kp C_VOL_UP  &kp C_NEXT
