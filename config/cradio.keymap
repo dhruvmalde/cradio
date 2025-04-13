@@ -51,7 +51,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // Revised tap dance implementations
+        // Improved tap dance implementations
         td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -73,13 +73,13 @@
             bindings = <&kp TAB>, <&to MAC>;
         };
 
-        // Simplified hold-tap for layers
-        lht: layer_hold_tap {
+        // Separate hold-tap for Enter key
+        ht_enter: hold_tap_enter {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
+            bindings = <&mo RIG>, <&kp ENTER>;
         };
     };
 
@@ -110,10 +110,10 @@
         compatible = "zmk,keymap";
         mac_layer {
             bindings = <
-                &kp Q      &kp W      &kp E      &kp R       &kp T              &kp Y          &kp U      &kp I      &kp O      &kp P
-                HRML(A,    S,         D,         F)          &kp G              &kp H          HRMR(J,    K,         L,        SQT)
-                &kp Z      &kp X      &kp C      &kp V       &kp B              &kp N          &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                                &lht LEF TAB  &td_left ENTER    &lht RIG SPACE &td_right BSPC
+                &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
+                HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
+                &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
+                                                &td_left     &kp ENTER      &kp BSPC   &td_right
             >;
         };
       
