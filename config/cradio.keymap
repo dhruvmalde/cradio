@@ -1,4 +1,4 @@
-// Copyright (c) 2022 The ZMK Contributors
+ // Copyright (c) 2022 The ZMK Contributors
 // SPDX-License-Identifier: MIT
 
 #include <behaviors.dtsi>
@@ -42,7 +42,6 @@
         };
         
         ht: hold_tap {
-            label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -82,7 +81,7 @@
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo LEF>, <&kp TAB>;
+            bindings = <&mo>, <&kp>;
         };
 
         // Hold-tap for right layer (hold for momentary, tap for Space)
@@ -91,7 +90,7 @@
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo RIG>, <&kp SPACE>;
+            bindings = <&mo>, <&kp>;
         };
     };
 
@@ -125,7 +124,7 @@
                 &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
                 HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
                 &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                                &ht_left_layer  &td_left_layer &kp ENTER   &ht_right_layer &td_right_layer
+                                                &ht_left_layer LEF TAB  &td_left_layer &kp ENTER   &ht_right_layer RIG SPACE &td_right_layer
             >;
         };
       
