@@ -1,4 +1,4 @@
-// Copyright (c) 2022 The ZMK Contributors
+// Copyright (c) 2024
 // SPDX-License-Identifier: MIT
 
 #include <behaviors.dtsi>
@@ -7,94 +7,113 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
-// Home row mods macro
-#define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
-#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
+// Layer Definitions
+#define MAC 0  // Base Mac layer
+#define RIG 1  // Right layer (navigation/media)
+#define LEF 2  // Left layer (symbols)
+#define TRI 3  // Tri-layer (function keys/Bluetooth)
 
-#define MAC 0
-#define RIG 1
-#define LEF 2
-#define TRI 3
+// Home row mods macros with optimized tapping terms
+#define HRML(k1,k2,k3,k4) &hml LSHFT k1  &hml LALT k2  &hml LCTRL k3  &hml LGUI k4
+#define HRMR(k1,k2,k3,k4) &hmr RGUI k1  &hmr RCTRL k2  &hmr RALT k3  &hmr RSHFT k4
 
-// Configure mmv behavior
+// Configure pointing behaviors
 &mmv {
+    acceleration-exponent = <1>;
+    time-to-max-speed-ms = <500>;
+    delay-ms = <0>;
     x-input-code = <INPUT_REL_X>;
     y-input-code = <INPUT_REL_Y>;
-    time-to-max-speed-ms = <300>;
-    acceleration-exponent = <2>;
 };
 
 &msc {
+    acceleration-exponent = <1>;
+    time-to-max-speed-ms = <300>;
+    delay-ms = <0>;
     x-input-code = <INPUT_REL_HWHEEL>;
     y-input-code = <INPUT_REL_WHEEL>;
-    time-to-max-speed-ms = <300>;
-    acceleration-exponent = <2>;
 };
 
-/{
+/ {
     behaviors {
+        // Enhanced hold-tap behaviors
+        hml: hold_tap_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        hmr: hold_tap_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        // Special enter key behavior
+        enter_hold_tap: enter_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        // Backspace/Delete morphing behavior
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp BACKSPACE>, <&kp DELETE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
-        };
-        
-        ht: hold_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <220>;
-            quick-tap-ms = <150>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
         };
 
         // Improved tap dance implementations
         td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <250>;
+            tapping-term-ms = <200>;
             bindings = <&kp TAB>, <&tog LEF>;
         };
 
         td_right: tap_dance_right {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <250>;
+            tapping-term-ms = <200>;
             bindings = <&kp SPACE>, <&tog RIG>;
         };
 
         td_mac: tap_dance_mac {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp TAB>, <&to MAC>;
-        };
-
-        // Separate hold-tap for Enter key
-        ht_enter: hold_tap_enter {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo RIG>, <&kp ENTER>;
+            bindings = <&kp TAB>, <&to MAC>;
         };
     };
 
     combos {
         compatible = "zmk,combos";
         combo_esc {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
 
         combo_backdel {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <8 9>;
             bindings = <&bspc_del>;
+        };
+
+        // Additional combo for caps word
+        combo_caps {
+            timeout-ms = <30>;
+            key-positions = <7 8>;
+            bindings = <&caps_word>;
         };
     };
 
@@ -108,12 +127,13 @@
 
     keymap {
         compatible = "zmk,keymap";
+
         mac_layer {
             bindings = <
                 &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
                 HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
                 &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                                &td_left     &kp ENTER      &kp BSPC   &td_right
+                                                &td_left     &enter_hold_tap RIG ENTER  &kp BSPC   &td_right
             >;
         };
       
