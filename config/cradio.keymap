@@ -1,4 +1,4 @@
- // Copyright (c) 2022 The ZMK Contributors
+// Copyright (c) 2022 The ZMK Contributors
 // SPDX-License-Identifier: MIT
 
 #include <behaviors.dtsi>
@@ -51,44 +51,33 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // Tap dance for left layer (on Mac layer)
-        td_left_layer: tap_dance_left_layer {
+        // Revised tap dance implementations
+        td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp TAB>, <&tog LEF>;
         };
 
-        // Tap dance for right layer (on Mac layer)
-        td_right_layer: tap_dance_right_layer {
+        td_right: tap_dance_right {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp SPACE>, <&tog RIG>;
         };
 
-        // Tap dance to return to Mac layer (on other layers)
-        td_return_mac: tap_dance_return_mac {
+        td_mac: tap_dance_mac {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp TAB>, <&to MAC>;
         };
 
-        // Hold-tap for left layer (hold for momentary, tap for Tab)
-        ht_left_layer: hold_tap_left_layer {
+        // Simplified hold-tap for layers
+        lht: layer_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
-        };
-
-        // Hold-tap for right layer (hold for momentary, tap for Space)
-        ht_right_layer: hold_tap_right_layer {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
+            flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&kp>;
         };
@@ -124,7 +113,7 @@
                 &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
                 HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
                 &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                                &ht_left_layer LEF TAB  &td_left_layer &kp ENTER   &ht_right_layer RIG SPACE &td_right_layer
+                                                &lht LEF TAB  &td_left      &kp ENTER   &lht RIG SPACE &td_right
             >;
         };
       
@@ -133,7 +122,7 @@
                 &kp TILDE  &kp LBKT   &kp LBRC   &kp RBRC   &trans          &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp GRAVE
                 &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT       &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &trans
                 &trans     &trans     &trans     &kp COLON  &kp SEMI        &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
-                                             &td_return_mac     &trans          &trans     &trans
+                                             &td_mac     &trans          &trans     &trans
             >;
         }; 
         
@@ -142,7 +131,7 @@
                 &kp INS     &kp N1     &kp N2     &kp N3     &kp DOT        &mkp MCLK   &msc SCRL_LEFT   &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  
                 &kp DEL     &kp N4     &kp N5     &kp N6     &kp N0         &mkp RCLK   &kp LEFT         &kp DOWN        &kp UP          &kp RIGHT       
                 &caps_word  &kp N7     &kp N8     &kp N9     &kp PRCNT      &mkp LCLK   &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  
-                                              &td_return_mac     &trans         &trans      &trans
+                                              &td_mac     &trans         &trans      &trans
             >;
         };
 
@@ -151,7 +140,7 @@
                 &kp F1     &kp F2     &kp F3     &kp F4     &bt BT_SEL 0     &bt BT_SEL 2  &out OUT_TOG  &none   &kp C_MUTE    &kp C_PP
                 &kp F5     &kp F6     &kp F7     &kp F8     &bt BT_SEL 1     &bt BT_SEL 3  &kp C_BRI_UP  &none   &kp C_VOL_UP  &kp C_NEXT
                 &kp F9     &kp F10    &kp F11    &kp F12    &bt BT_CLR       &bt BT_SEL 4  &kp C_BRI_DEC &none   &kp C_VOL_DN  &kp C_PREV
-                                             &td_return_mac     &trans           &trans        &trans
+                                             &td_mac     &trans           &trans        &trans
             >;
         };
     };
