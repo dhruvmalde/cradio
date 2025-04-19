@@ -8,9 +8,9 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // Layer Definitions
-#define DEFAULT 0  // Base Mac layer
-#define RIGHT 1  // Right layer (navigation/media)
-#define LEFT 2  // Left layer (symbols)
+#define MAC 0  // Base Mac layer
+#define RIG 1  // Right layer (navigation/media)
+#define LEF 2  // Left layer (symbols)
 #define TRI 3  // Tri-layer (function keys/Bluetooth)
 
 // Home row mods macros with optimized tapping terms
@@ -60,7 +60,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <300>;
+            tapping-term-ms = <200>;
             bindings = <&mo>, <&kp>;
         };
 
@@ -76,21 +76,21 @@
         td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <200>;
             bindings = <&kp ENTER>, <&tog LEF>;
         };
 
         td_right: tap_dance_right {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <200>;
             bindings = <&kp SPACE>, <&tog RIG>;
         };
 
         td_mac: tap_dance_mac {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <200>;
             bindings = <&kp TAB>, <&to MAC>;
         };
     };
@@ -98,25 +98,25 @@
     combos {
         compatible = "zmk,combos";
         combo_esc {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
 
         combo_backdel {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <8 9>;
             bindings = <&bspc_del>;
         };
 
         // Additional combo for caps word
         combo_caps {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <7 8>;
             bindings = <&caps_word>;
         };
         combo_mac_layer {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <31 32>;  // These are the positions for the two center bottom keys
             bindings = <&to MAC>;
         };
@@ -133,7 +133,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        mac_layer {
             bindings = <
                 &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
                 HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
