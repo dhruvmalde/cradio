@@ -149,7 +149,7 @@
             bindings = <
 
                 &auto_shift Q  &auto_shift W  &auto_shift E  &auto_shift R  &auto_shift T     &auto_shift Y  &auto_shift U  &auto_shift I  &auto_shift O  &auto_shift P
-                &hml LSHFT A   &hml LALT S    &hml LCTRL D   &hml LGUI F    &auto_shift G     &auto_shift H  &hmr RGUI J    &hmr RCTRL K   &hmr RALT L    &hmr RSHFT SQT
+                HRML(A,        S,         D,         F)                     &auto_shift G     &auto_shift H  HRMR(J,    K,         L,        SQT)
                 &auto_shift Z  &auto_shift X  &auto_shift C  &auto_shift V  &auto_shift B     &auto_shift N  &auto_shift M  &kp COMMA      &kp DOT        &kp FSLH
                                                              &lt 2 TAB      &td_left          &td_right      &lt 1 BSPC
             >;
