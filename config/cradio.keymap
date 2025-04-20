@@ -44,7 +44,7 @@
             quick-tap-ms = <200>;          // Prevents repeat shifts on fast taps
             flavor = "tap-preferred";
             require-prior-idle-ms = <100>;  // Lower than before
-            bindings = <&sk LSHFT>, <&kp>;
+            bindings = <&sk>, <&kp>;
         };
     
         // Home Row Mods (Easier activation)
