@@ -13,7 +13,7 @@
 #define LEF 2  // Left layer (symbols)
 #define TRI 3  // Tri-layer (function keys/Bluetooth)
 
-// Home row mods macros with optimized tapping terms
+// Home row mods macros
 #define HRML(k1,k2,k3,k4) &hml LSHFT k1  &hml LALT k2  &hml LCTRL k3  &hml LGUI k4
 #define HRMR(k1,k2,k3,k4) &hmr RGUI k1  &hmr RCTRL k2  &hmr RALT k3  &hmr RSHFT k4
 
@@ -36,26 +36,40 @@
 
 / {
     behaviors {
-        // Enhanced hold-tap behaviors
+        // Auto-Shift (More forgiving)
+        auto_shift: auto_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;       // 50ms longer than HRM
+            quick-tap-ms = <200>;          // Prevents repeat shifts on fast taps
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <100>;  // Lower than before
+            bindings = <&sk LSHFT>, <&kp>;
+        };
+    
+        // Home Row Mods (Easier activation)
         hml: hold_tap_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <300>;
+            tapping-term-ms = <250>;       // Increased from 200ms
+            quick-tap-ms = <200>;          // Allows faster repeat
+            require-prior-idle-ms = <80>;   // Very lenient
             bindings = <&kp>, <&kp>;
         };
-
-        hmr: hold_tap_right {
+    
+        hmr: hold_tap_right { 
+            // Same settings as hml for consistency
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <300>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <80>;
             bindings = <&kp>, <&kp>;
         };
 
-        // Special enter key behavior
+        // Other behaviors remain unchanged
         enter_hold_tap: enter_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -64,7 +78,6 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // Backspace/Delete morphing behavior
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -72,7 +85,6 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        // Improved tap dance implementations
         td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -98,25 +110,25 @@
     combos {
         compatible = "zmk,combos";
         combo_esc {
-            timeout-ms = <30>;
+            timeout-ms = <75>;
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
 
         combo_backdel {
-            timeout-ms = <30>;
+            timeout-ms = <75>;
             key-positions = <8 9>;
             bindings = <&bspc_del>;
         };
 
         // Additional combo for caps word
         combo_caps {
-            timeout-ms = <30>;
+            timeout-ms = <75>;
             key-positions = <7 8>;
             bindings = <&caps_word>;
         };
         combo_mac_layer {
-            timeout-ms = <30>;
+            timeout-ms = <75>;
             key-positions = <31 32>;  // These are the positions for the two center bottom keys
             bindings = <&to MAC>;
         };
@@ -135,13 +147,14 @@
 
         mac_layer {
             bindings = <
-                &kp Q      &kp W      &kp E      &kp R       &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
-                HRML(A,    S,         D,         F)          &kp G          &kp H      HRMR(J,    K,         L,        SQT)
-                &kp Z      &kp X      &kp C      &kp V       &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-                                                 &lt 2 TAB   &td_left       &td_right  &lt 1 BSPC
+
+                &auto_shift Q  &auto_shift W  &auto_shift E  &auto_shift R  &auto_shift T     &auto_shift Y  &auto_shift U  &auto_shift I  &auto_shift O  &auto_shift P
+                &hml LSHFT A   &hml LALT S    &hml LCTRL D   &hml LGUI F    &kp G             &kp H          &hmr RGUI J    &hmr RCTRL K   &hmr RALT L    &hmr RSHFT SQT
+                &auto_shift Z  &auto_shift X  &auto_shift C  &auto_shift V  &auto_shift B     &auto_shift N  &auto_shift M  &kp COMMA      &kp DOT        &kp FSLH
+                                                             &lt 2 TAB      &td_left          &td_right  &lt 1 BSPC
             >;
         };
-            
+        
         right_layer {
             bindings = <
                 &kp INS     &kp N1     &kp N2     &kp N3     &kp DOT        &mkp MCLK   &msc SCRL_LEFT   &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  
