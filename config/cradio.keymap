@@ -36,15 +36,6 @@
 
 / {
     behaviors {
-        // Auto-Shift Behavior (simplified)
-        auto_shift: auto_shift {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-            flavor = "tap-preferred";
-            bindings = <&sk>, <&kp>;
-        };
 
         // Home Row Mods
         hml: hold_tap_left {
@@ -84,46 +75,40 @@
         td_left: tap_dance_left {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&kp ENTER>, <&tog LEF>;
         };
 
         td_right: tap_dance_right {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&kp SPACE>, <&tog RIG>;
-        };
-
-        td_mac: tap_dance_mac {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp TAB>, <&to MAC>;
         };
     };
 
     combos {
         compatible = "zmk,combos";
         combo_esc {
-            timeout-ms = <75>;
+            timeout-ms = <50>;
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
 
         combo_backdel {
-            timeout-ms = <75>;
+            timeout-ms = <50>;
             key-positions = <8 9>;
             bindings = <&bspc_del>;
         };
 
         combo_caps {
-            timeout-ms = <75>;
+            timeout-ms = <50>;
             key-positions = <7 8>;
             bindings = <&caps_word>;
         };
+
         combo_mac_layer {
-            timeout-ms = <75>;
+            timeout-ms = <50>;
             key-positions = <31 32>;
             bindings = <&to MAC>;
         };
