@@ -25,7 +25,7 @@ https://www.youtube.com/@SethusBuilds
 https://www.youtube.com/@joe_scotto
 https://www.youtube.com/@joseanmartinez
 
-**_Key mapping and visuaalization made easy_**
+**_Key mapping and visuzalization made easy_**
 https://github.com/caksoylar/keymap-drawer-web
 https://nickcoutsos.github.io/keymap-editor/
 
