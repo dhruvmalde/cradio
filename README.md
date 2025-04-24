@@ -1,9 +1,9 @@
- **Ferris Sweep Keyboard**  
+ **Ferris Sweep/Cradio Keyboard**  
  
 ![IMG_0443](https://github.com/user-attachments/assets/3c7cb40e-4794-4bdf-b4e8-6501b9019eef)
 ![IMG_0438](https://github.com/user-attachments/assets/cf32917a-69a2-4c07-9c13-640b3a4933d4)
 
-Welcome to Dhruv's Ferris Sweep (Craduio) Keyboard repository! This README serves as your guide to understanding and using the Ferris Sweep Keyboard, a customizable and ergonomic mechanical keyboard designed for enthusiasts and professionals alike, the best part you can build it yourself just like I did with no prior experience needed (just some curiosity and tinkering)
+Welcome to Dhruv's Ferris Sweep (Cardio) Keyboard repository! This README serves as your guide to understanding and using the Ferris Sweep Keyboard, a customizable and ergonomic mechanical keyboard designed for enthusiasts and professionals alike, the best part you can build it yourself just like I did with no prior experience needed (just some curiosity and tinkering)
 
 **_Overview_**
 The Ferris Sweep Keyboard is a unique ergonomic keyboard that prioritizes comfort, functionality, and aesthetic appeal. Named after its distinctive curved design reminiscent of a ferris wheel, this keyboard aims to revolutionize your typing experience.
