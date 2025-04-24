@@ -1,7 +1,8 @@
  **Ferris Sweep/Cradio Keyboard**  
- 
-![IMG_0443](https://github.com/user-attachments/assets/3c7cb40e-4794-4bdf-b4e8-6501b9019eef)
-![IMG_0438](https://github.com/user-attachments/assets/cf32917a-69a2-4c07-9c13-640b3a4933d4)
+![IMG_0438](https://github.com/user-attachments/assets/30d6e776-d58f-4e36-abf8-953002895fe2)
+ ![IMG_0443](https://github.com/user-attachments/assets/a7f88256-b5f6-430f-a903-63a41228cba7)
+
+
 
 Welcome to Dhruv's Ferris Sweep (Cardio) Keyboard repository! This README serves as your guide to understanding and using the Ferris Sweep Keyboard, a customizable and ergonomic mechanical keyboard designed for enthusiasts and professionals alike, the best part you can build it yourself just like I did with no prior experience needed (just some curiosity and tinkering)
 
