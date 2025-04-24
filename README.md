@@ -1,8 +1,7 @@
  **Ferris Sweep/Cradio Keyboard**  
-![IMG_0438](https://github.com/user-attachments/assets/30d6e776-d58f-4e36-abf8-953002895fe2)
- ![IMG_0443](https://github.com/user-attachments/assets/a7f88256-b5f6-430f-a903-63a41228cba7)
 
-
+![IMG_0443](https://github.com/user-attachments/assets/87b83631-ebcf-4e48-882f-54c0e9ba7621)
+![IMG_0438](https://github.com/user-attachments/assets/8ec4574c-2e26-4b11-b9e3-19a4b5177aa5)
 
 Welcome to Dhruv's Ferris Sweep (Cardio) Keyboard repository! This README serves as your guide to understanding and using the Ferris Sweep Keyboard, a customizable and ergonomic mechanical keyboard designed for enthusiasts and professionals alike, the best part you can build it yourself just like I did with no prior experience needed (just some curiosity and tinkering)
 
@@ -43,3 +42,4 @@ Tap dance and mod tap both are used for layer switching, while they also couple 
 Keyboard Layout file  - ZMK Ferris Sweep
 
 ![my_keymap](https://github.com/user-attachments/assets/a6515e12-ce3d-455a-b342-91c62a6e90f2)
+
