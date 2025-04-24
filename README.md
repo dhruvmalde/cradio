@@ -1,9 +1,9 @@
- **Ferris Sweep Keyboard**
+ **Ferris Sweep Keyboard**  
  
+![IMG_0443](https://github.com/user-attachments/assets/3c7cb40e-4794-4bdf-b4e8-6501b9019eef)
+![IMG_0438](https://github.com/user-attachments/assets/cf32917a-69a2-4c07-9c13-640b3a4933d4)
+
 Welcome to Dhruv's Ferris Sweep (Craduio) Keyboard repository! This README serves as your guide to understanding and using the Ferris Sweep Keyboard, a customizable and ergonomic mechanical keyboard designed for enthusiasts and professionals alike, the best part you can build it yourself just like I did with no prior experience needed (just some curiosity and tinkering)
-
-![IMG_9232](https://github.com/greedysnakeDRV/zmk-configV2/assets/161101617/ae871a76-006a-4d10-94b6-84b6902707ed)
-
 
 **_Overview_**
 The Ferris Sweep Keyboard is a unique ergonomic keyboard that prioritizes comfort, functionality, and aesthetic appeal. Named after its distinctive curved design reminiscent of a ferris wheel, this keyboard aims to revolutionize your typing experience.
@@ -35,7 +35,9 @@ https://keebmaker.com
 
 if you are just here for the keymap, here you go
 
-Combo implementation: Copy, Paste, Undo, Delete, Escape & Enter
+Combo implementation:
+Delete, Backspace, Escape & Caps Word
+Tap dance and mod tap both are used for layer switching, while they also couple as the enter key and the space key on the left and right centre thumb keys (tap dance combos defined as td_left and td_right)
 
 Keyboard Layout file  - ZMK Ferris Sweep
 
